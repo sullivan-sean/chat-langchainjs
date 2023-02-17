@@ -4,12 +4,11 @@ import { OpenAI } from "langchain/llms";
 import { LLMChain, ChatVectorDBQAChain, loadQAChain } from "langchain/chains";
 import { HNSWLib } from "langchain/vectorstores";
 import { PromptTemplate } from "langchain/prompt";
+import { OpenAIEmbeddings } from 'langchain/embeddings';
 
 type Data = {
   name: string
 }
-
-const vectorstore = HNSWLib()
 
 const CONDENSE_PROMPT = PromptTemplate.fromTemplate(`Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question.
 
@@ -19,12 +18,17 @@ Follow Up Input: {question}
 Standalone question:`);
 
 const QA_PROMPT = PromptTemplate.fromTemplate(
-`Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
-
-{context}
-
+`You are an AI assistant for the open source library LangChain. The documentation is located at https://langchain.readthedocs.io.
+You are given the following extracted parts of a long document and a question. Provide a conversational answer with a hyperlink to the documentation.
+You should only use hyperlinks that are explicitly listed as a source in the context. Do NOT make up a hyperlink that is not listed.
+If the question includes a request for code, provide a code block directly from the documentation.
+If you don't know the answer, just say "Hmm, I'm not sure." Don't try to make up an answer.
+If the question is not about LangChain, politely inform them that you are tuned to only answer questions about LangChain.
 Question: {question}
-Helpful Answer:`);
+=========
+{context}
+=========
+Answer in Markdown:`);
 
 const makeChain = (vectorstore: HNSWLib) => {
   const questionGenerator = new LLMChain({
@@ -48,10 +52,13 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   const body = req.body;
+  const vectorstore = await HNSWLib.load("data", new OpenAIEmbeddings())
   const qaChain = makeChain(vectorstore);
+  
   const result = await qaChain.call({
     question: body.question,
-    chat_history: body.chat_history
+    chat_history: body.history,
   });
-  res.status(200).json(result)
+  
+  res.status(200).json({ result: result })
 }
