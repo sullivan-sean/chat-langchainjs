@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { OpenAI } from "langchain/llms";
 import { LLMChain, ChatVectorDBQAChain, loadQAChain } from "langchain/chains";
 import { HNSWLib } from "langchain/vectorstores";
-import { PromptTemplate } from "langchain/prompt";
+import { PromptTemplate } from "langchain/prompts";
 import { OpenAIEmbeddings } from 'langchain/embeddings';
 
 type Data = {
