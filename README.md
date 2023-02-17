@@ -13,7 +13,13 @@ The backend server relies on this data ingestion being done and this data being 
 
 ## Getting Started
 
-First, run the development server:
+First, create a new `.env` file from `.env.example` and add your OpenAI API key found [here](https://platform.openai.com/account/api-keys).
+
+```bash
+cp .env.example .env
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
