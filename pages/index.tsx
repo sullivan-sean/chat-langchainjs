@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect, useMemo } from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import Image from 'next/image'
-import ReactMarkdown from 'react-markdown'
+import Image from 'next/image';
+import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
 import CircularProgress from '@mui/material/CircularProgress';
 
 type Message = {
@@ -42,7 +43,7 @@ export default function Home() {
 
   const socketInitializer = async () => {
     await fetch('/api/chat-stream');
-    const ws = new WebSocket("ws://localhost:3000/api")
+    const ws = new WebSocket(`ws://${window.location.host}/api`)
 
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
@@ -92,7 +93,7 @@ export default function Home() {
   }, []);
 
   // Handle form submission
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const question = userInput.trim();
@@ -106,7 +107,7 @@ export default function Home() {
   };
 
   // Prevent blank submissions and allow for multiline input
-  const handleEnter = (e) => {
+  const handleEnter = (e: any) => {
     if (e.key === "Enter" && userInput) {
       if(!e.shiftKey && userInput) {
         handleSubmit(e);
@@ -130,11 +131,23 @@ export default function Home() {
       </Head>
       <div className={styles.topnav}>
         <div className = {styles.navlogo}>
-          <a href="/">LangChain</a>
+          <Link href="/">LangChain</Link>
         </div>
         <div className = {styles.navlinks}>
-          <a href="https://langchain.readthedocs.io/en/latest/" target="_blank">Docs</a>
-          <a href="https://github.com/zahidkhawaja/langchain-chat-nextjs" target="_blank">GitHub</a>
+          <a
+            href="https://langchain.readthedocs.io/en/latest/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Docs
+          </a>
+          <a
+            href="https://github.com/zahidkhawaja/langchain-chat-nextjs"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
         </div>
       </div>
       <main className={styles.main}>
@@ -159,7 +172,7 @@ export default function Home() {
                   <div key={index} className={className}>
                     {icon}
                     <div className = {styles.markdownanswer}>
-                      <ReactMarkdown linkTarget = {"_blank"}>{message.message}</ReactMarkdown>
+                      <ReactMarkdown linkTarget="_blank">{message.message}</ReactMarkdown>
                     </div>
                   </div>
               )
@@ -202,7 +215,14 @@ export default function Home() {
             </form>
           </div>
           <div className = {styles.footer}>
-            <p>Powered by <a href = "https://github.com/hwchase17/langchain" target="_blank">LangChain</a>. Built by <a href="https://twitter.com/chillzaza_" target="_blank">Zahid</a>.</p>
+            <p>Powered by
+              <a
+                href="https://github.com/hwchase17/langchain"
+                target="_blank"
+                rel="noreferrer"
+              >
+                LangChain
+              </a>. Built by <a href="https://twitter.com/chillzaza_" target="_blank" rel="noreferrer">Zahid</a> and <a href="https://twitter.com/_seanyneutron" target="_blank" rel="noreferrer">Sean</a>.</p>
           </div>
         </div>
       </main>

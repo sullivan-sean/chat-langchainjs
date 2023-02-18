@@ -1,2 +1,3 @@
 langchain
 bs4
+pandas

@@ -1,16 +1,5 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Data Ingestion
-
-Data ingestion happens in two steps. 
-
-First, you should `cd ingest` and run `sh ingest.sh`. This will load and parse data.
-
-Next, you should come back to the top level and install dependencies with `yarn dev` and then run the data ingestion script with `npx ts-node ingest.ts`. This will split text, create embeddings, store them in a vectorstore, and then save it to a directory.
-We save it to a directory because we only want to run the data ingestion process once. 
-
-The backend server relies on this data ingestion being done and this data being saved. Please make sure to run this before moving on to the next step.
-
 ## Getting Started
 
 First, create a new `.env` file from `.env.example` and add your OpenAI API key found [here](https://platform.openai.com/account/api-keys).
@@ -19,14 +8,44 @@ First, create a new `.env` file from `.env.example` and add your OpenAI API key 
 cp .env.example .env
 ```
 
+Next, we'll need to load our data source.
+
+### Data Ingestion
+
+Data ingestion happens in two steps. 
+
+First, you should run
+
+```bash
+pip install -r ingest/requirements.txt
+sh ingest/download.sh
+````
+
+This will download our data source (in this case the Langchain docs ) and parse it.
+
+Next, install dependencies and run the ingestion script:
+```bash
+yarn && yarn ingest
+```
+
+This will split text, create embeddings, store them in a vectorstore, and
+then save it to the `data/` directory.
+
+We save it to a directory because we only want to run the (expensive) data ingestion process once. 
+
+The Next.js server relies on the presence of the `data/` directory. Please
+make sure to run this before moving on to the next step.
+
+**Note:** If you'd like to chat your own data, you can set up your own ingestion
+pipeline, and create a similar `data/` directory with a vectorstore in it.
+The server should work just the same 😄
+
+### Running the Server
+
 Then, run the development server:
 
 ```bash
-npm run dev
-# or
 yarn dev
-# or
-pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
