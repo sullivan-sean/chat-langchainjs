@@ -441,6 +441,11 @@
   resolved "https://registry.npmjs.org/@types/ms/-/ms-0.7.31.tgz"
   integrity sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==
 
+"@types/node@*":
+  version "18.14.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.14.0.tgz#94c47b9217bbac49d4a67a967fdcdeed89ebb7d0"
+  integrity sha512-5EWrvLmglK+imbCJY0+INViFWUHg1AHel1sq4ZVSfdcNqGy9Edv3UB9IIzzg+xPaUcAgZYcfVs2fBcwDeZzU0A==
+
 "@types/node@18.13.0":
   version "18.13.0"
   resolved "https://registry.npmjs.org/@types/node/-/node-18.13.0.tgz"
@@ -495,6 +500,13 @@
   version "2.0.6"
   resolved "https://registry.npmjs.org/@types/unist/-/unist-2.0.6.tgz"
   integrity sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==
+
+"@types/ws@^8.5.4":
+  version "8.5.4"
+  resolved "https://registry.yarnpkg.com/@types/ws/-/ws-8.5.4.tgz#bb10e36116d6e570dd943735f86c933c1587b8a5"
+  integrity sha512-zdQDHKUgcX/zBc4GrwsE/7dVdAD8JR4EuiAXiiUhhfyIJXXb2+PrGshFyeXWQPMmmZ2XxgaqclgpIC7eTXc1mg==
+  dependencies:
+    "@types/node" "*"
 
 "@typescript-eslint/parser@^5.42.0":
   version "5.52.0"
@@ -952,6 +964,11 @@ dom-helpers@^5.0.1:
     "@babel/runtime" "^7.8.7"
     csstype "^3.0.2"
 
+dotenv@^16.0.3:
+  version "16.0.3"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.0.3.tgz#115aec42bac5053db3c456db30cc243a5a836a07"
+  integrity sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==
+
 emoji-regex@^9.2.2:
   version "9.2.2"
   resolved "https://registry.npmjs.org/emoji-regex/-/emoji-regex-9.2.2.tgz"
@@ -1276,6 +1293,11 @@ esutils@^2.0.2:
   version "2.0.3"
   resolved "https://registry.npmjs.org/esutils/-/esutils-2.0.3.tgz"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
+
+eventsource-parser@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/eventsource-parser/-/eventsource-parser-0.1.0.tgz#4a6b84751ca8e704040e6f7f50e7d77344fa1b7c"
+  integrity sha512-M9QjFtEIkwytUarnx113HGmgtk52LSn3jNAtnWKi3V+b9rqSfQeVdLsaD5AG/O4IrGQwmAAHBIsqbmURPTd2rA==
 
 exponential-backoff@^3.1.0:
   version "3.1.0"
@@ -1895,12 +1917,13 @@ kleur@^4.0.3:
   resolved "https://registry.npmjs.org/kleur/-/kleur-4.1.5.tgz"
   integrity sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==
 
-langchain@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/langchain/-/langchain-0.0.6.tgz#f34bf88cd09e5717869a831346bcd332357e9919"
-  integrity sha512-QatFDYmuOqj9iWCYmH3FmqEHkgLUtcZfi/QqwSFDuwXqPqMTf/QfYXW+8umNLylDL+lWqHrKpzfoqzkDWo+zKw==
+langchain@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/langchain/-/langchain-0.0.7.tgz#36290575e47c60b7f314690d5fbcc81b537a9a2b"
+  integrity sha512-M7Vb42XWQ59+r+keEgbLGafPpERXh0zXyz58HYmNHV8b6q3X5JQFsPqlcx6bY7tjkzGUuCe9ORKF25lzKdFVXw==
   dependencies:
     deepcopy "^2.1.0"
+    eventsource-parser "^0.1.0"
     exponential-backoff "^3.1.0"
     expr-eval "^2.0.2"
     node-fetch "2"
@@ -3090,6 +3113,11 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz"
   integrity sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==
+
+ws@^8.12.1:
+  version "8.12.1"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.12.1.tgz#c51e583d79140b5e42e39be48c934131942d4a8f"
+  integrity sha512-1qo+M9Ba+xNhPB+YTWUlK6M17brTut5EXbcBaMRN5pH5dFrXz7lzz1ChFSUq3bOUl8yEvSenhHmYUNJxFzdJew==
 
 yallist@^4.0.0:
   version "4.0.0"
