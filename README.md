@@ -52,7 +52,7 @@ The production version of this repo is hosted on
 [fly](https://chat-langchainjs.fly.dev/). To deploy your own server on Fly, you
 can use the provided `fly.toml` and `Dockerfile` as a starting point.
 
-**Note:** As a Next.js app it seems like Next.js is a natural place to
+**Note:** As a Next.js app it seems like Vercel is a natural place to
 host this site. Unfortunately there are
 [limitations](https://github.com/websockets/ws/issues/1786#issuecomment-678315435)
 to secure websockets using `ws` with Next.js which requires using a custom
