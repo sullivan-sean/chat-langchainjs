@@ -13,6 +13,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@microsoft/fetch-event-source": "^2.0.1",
     "@mui/material": "^5.11.4",
     "@next/font": "13.1.6",
     "dotenv": "^16.0.3",
@@ -24,14 +25,14 @@
     "openai": "^3.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-markdown": "^8.0.5",
-    "ws": "^8.12.1"
+    "react-markdown": "^8.0.5"
   },
   "devDependencies": {
     "@types/node": "18.13.0",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "@types/ws": "^8.5.4",
+    "cohere-ai": "^5.0.2",
     "ts-node": "^10.9.1",
     "typescript": "4.9.5"
   }

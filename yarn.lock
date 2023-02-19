@@ -217,6 +217,11 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@microsoft/fetch-event-source@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@microsoft/fetch-event-source/-/fetch-event-source-2.0.1.tgz#9ceecc94b49fbaa15666e38ae8587f64acce007d"
+  integrity sha512-W6CLUJ2eBMw3Rec70qrsEW0jOm/3twwJv21mrmj2yORiaVmVYGS4sSS5yUwvQc1ZlDLYGPnClVWmUUMagKNsfA==
+
 "@mui/base@5.0.0-alpha.118":
   version "5.0.0-alpha.118"
   resolved "https://registry.npmjs.org/@mui/base/-/base-5.0.0-alpha.118.tgz"
@@ -829,6 +834,11 @@ clsx@^1.2.1:
   version "1.2.1"
   resolved "https://registry.npmjs.org/clsx/-/clsx-1.2.1.tgz"
   integrity sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==
+
+cohere-ai@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/cohere-ai/-/cohere-ai-5.0.2.tgz#44aa80dabef00f6440ddc091808d5916be4c32d3"
+  integrity sha512-Svt8VC20/GgwCBF2kHYZI3JZkfqEoG6wCbTT6tohNK8x/aBFyMxlBUYEF0gRGXH1055vQpBjj5ewHF8LpnSSOA==
 
 color-convert@^1.9.0:
   version "1.9.3"
@@ -2816,6 +2826,11 @@ space-separated-tokens@^2.0.0:
   version "2.0.2"
   resolved "https://registry.npmjs.org/space-separated-tokens/-/space-separated-tokens-2.0.2.tgz"
   integrity sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==
+
+sse.js@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/sse.js/-/sse.js-0.6.1.tgz#1de304f51a5b870e78c0ad72c3b1d7b682a733a1"
+  integrity sha512-peXG6GnWqF5hnubhMw0WfB6rqQy7z7LaMBT067vqgQwC3gKz8JGFzexBSV80FqZ9JoUDwo3Xt5nxkrGrgbPrtA==
 
 stop-iteration-iterator@^1.0.0:
   version "1.0.0"

@@ -31,11 +31,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     };
 
     const onNewToken = (token: string) => {
-        sendResponse({ sender: 'bot', message: token, type: 'stream' });
+      sendResponse({ sender: 'bot', message: token, type: 'stream' });
     }
 
     const chainPromise = HNSWLib.load("data", new OpenAIEmbeddings()).then((vs) => makeChain(vs, onNewToken));
     const chatHistory: [string, string][] = [];
+    const encoder = new TextEncoder();
+
 
     ws.on('message', async (data) => {
       try {

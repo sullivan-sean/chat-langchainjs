@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import CircularProgress from '@mui/material/CircularProgress';
+import { fetchEventSource } from '@microsoft/fetch-event-source';
 
 type Message = {
   type: "apiMessage" | "userMessage";
@@ -12,24 +13,17 @@ type Message = {
   isStreaming?: boolean;
 }
 
-const getWebsocketUrl = () => {
-  const origin = window.location.origin;
-  const secure = origin.startsWith("https");
-  const protocol = secure ? "wss" : "ws";
-  return `${protocol}://${window.location.host}/api`
-}
-
 export default function Home() {
-
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [websocket, setWebsocket] = useState<WebSocket | null>(null);
-  const [{ messages, pending }, setMessageState] = useState<{ messages: Message[], pending?: string }>({
+  const [messageState, setMessageState] = useState<{ messages: Message[], pending?: string, history: [string, string][] }>({
     messages: [{
       "message": "Hi there! How can I help?",
       "type": "apiMessage"
     }],
+    history: []
   });
+  const { messages, pending, history } = messageState;
 
   const messageListRef = useRef<HTMLDivElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -47,58 +41,6 @@ export default function Home() {
     textAreaRef.current?.focus();
   }, []);
 
-
-  const socketInitializer = async () => {
-    await fetch('/api/chat-stream');
-    const ws = new WebSocket(getWebsocketUrl());
-
-    ws.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      if (data.sender === "bot") {
-        if (data.type === "start") {
-          setMessageState(state => ({ ...state, pending: "" }));
-        } else if (data.type === "stream") {
-          setMessageState(state => ({
-            ...state,
-            pending: (state.pending ?? "") + data.message
-          }));
-        } else if (data.type === "end") {
-          setMessageState(state => ({
-            messages: [...state.messages, {
-              type: "apiMessage",
-              message: state.pending ?? "",
-            }],
-            pending: undefined
-          }));
-          setLoading(false);
-        } else if (data.type === "error") {
-          setMessageState(state => ({
-            messages: [...state.messages, {
-              type: "apiMessage",
-              message: data.message,
-            }],
-            pending: undefined
-          }));
-          setLoading(false);
-        }
-      } else {
-        setMessageState(state => ({
-          messages: [...state.messages, {
-            type: "userMessage",
-            message: data.message
-          }],
-          pending: undefined
-        }))
-      }
-    }
-    return ws;
-  }
-
-
-  useEffect(() => {
-    socketInitializer().then(setWebsocket);
-  }, []);
-
   // Handle form submission
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -108,10 +50,53 @@ export default function Home() {
       return;
     }
 
-    websocket?.send(question);
+    setMessageState(state => ({
+      ...state,
+      messages: [...state.messages, {
+        type: "userMessage",
+        message: question
+      }],
+      pending: undefined
+    }));
+
     setLoading(true);
     setUserInput("");
-  };
+    setMessageState(state => ({ ...state, pending: "" }));
+
+    const ctrl = new AbortController();
+
+    fetchEventSource('/api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        question,
+        history
+      }),
+      signal: ctrl.signal,
+      onmessage: (event) => {
+        if (event.data === "[DONE]") {
+          setMessageState(state => ({
+            history: [...state.history, [question, state.pending ?? ""]],
+            messages: [...state.messages, {
+              type: "apiMessage",
+              message: state.pending ?? "",
+            }],
+            pending: undefined
+          }));
+          setLoading(false);
+          ctrl.abort();
+        } else {
+          const data = JSON.parse(event.data);
+          setMessageState(state => ({
+            ...state,
+            pending: (state.pending ?? "") + data.data,
+          }));
+        }
+      }
+    });
+  }
 
   // Prevent blank submissions and allow for multiline input
   const handleEnter = (e: any) => {
@@ -222,12 +207,7 @@ export default function Home() {
             </form>
           </div>
           <div className = {styles.footer}>
-            <p>Powered by
-              <a
-                href="https://github.com/hwchase17/langchain"
-                target="_blank"
-                rel="noreferrer"
-              >
+            <p>Powered by <a href="https://github.com/hwchase17/langchain" target="_blank" rel="noreferrer">
                 LangChain
               </a>. Built by <a href="https://twitter.com/chillzaza_" target="_blank" rel="noreferrer">Zahid</a> and <a href="https://twitter.com/_seanyneutron" target="_blank" rel="noreferrer">Sean</a>.</p>
           </div>
