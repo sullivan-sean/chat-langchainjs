@@ -46,6 +46,21 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+### Deploying the server
+
+The production version of this repo is hosted on
+[fly](https://chat-langchainjs.fly.dev/). To deploy your own server on Fly, you
+can use the provided `fly.toml` and `Dockerfile` as a starting point.
+
+**Note:** As a Next.js app it seems like Next.js is a natural place to
+host this site. Unfortunately there are
+[limitations](https://github.com/websockets/ws/issues/1786#issuecomment-678315435)
+to secure websockets using `ws` with Next.js which requires using a custom
+server which cannot be hosted on Vercel. Even using server side events, it
+seems, Vercel's serverless functions seem to prohibit streaming responses
+(e.g. see
+[here](https://github.com/vercel/next.js/issues/9965#issuecomment-820156947))
+
 ## Inspirations
 
 This repo borrows heavily from 
