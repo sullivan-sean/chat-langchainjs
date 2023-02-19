@@ -76,6 +76,7 @@ export default function Home() {
       }),
       signal: ctrl.signal,
       onmessage: (event) => {
+        console.log(event);
         if (event.data === "[DONE]") {
           setMessageState(state => ({
             history: [...state.history, [question, state.pending ?? ""]],
