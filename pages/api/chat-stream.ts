@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import type { Server } from "net";
+import type { Server as HttpServer } from "http";
+import type { Server as HttpsServer } from "https";
 import { WebSocketServer } from 'ws';
 import { HNSWLib } from "langchain/vectorstores";
 import { OpenAIEmbeddings } from 'langchain/embeddings';
@@ -12,12 +13,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return;
   }
 
-  const server = (res.socket as any).server as Server;
-  const wss = new WebSocketServer({ noServer: true });
+  const server = (res.socket as any).server as HttpsServer | HttpServer;
+  const wss = new WebSocketServer({ server });
   (res.socket as any).server.wss = wss;
   
   server.on('upgrade', (req, socket, head) => {
-    if (!req.url.includes('/_next/webpack-hmr')) {
+    if (!req.url?.includes('/_next/webpack-hmr')) {
       wss.handleUpgrade(req, socket, head, (ws) => {
         wss.emit('connection', ws, req);
       });
