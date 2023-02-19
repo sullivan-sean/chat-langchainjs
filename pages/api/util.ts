@@ -33,6 +33,15 @@ export const makeChain = (vectorstore: HNSWLib, onTokenStream?: (token: string) 
       temperature: 0,
       streaming: Boolean(onTokenStream),
       callbackManager: {
+        handleStart: (...args) => {
+          console.log("LLMSTART", ...args);
+        },
+        handleEnd: (...args) => {
+          console.log("LLMEND", ...args);
+        },
+        handleError: (...args) => {
+          console.log("lLMErr", ...args);
+        },
         handleNewToken: onTokenStream,
       }
     }),
