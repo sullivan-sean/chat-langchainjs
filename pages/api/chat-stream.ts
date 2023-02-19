@@ -14,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const server = (res.socket as any).server as HttpsServer | HttpServer;
-  const wss = new WebSocketServer({ server });
+  const wss = new WebSocketServer({ noServer: true });
   (res.socket as any).server.wss = wss;
   
   server.on('upgrade', (req, socket, head) => {
