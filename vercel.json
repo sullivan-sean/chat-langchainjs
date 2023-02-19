@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "api/chat.js": {
+      "includeFiles": "data/**"
+    }
+  }
+}
+
