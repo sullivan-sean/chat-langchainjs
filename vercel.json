@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/chat.ts": {
+    "pages/api/chat.js": {
       "includeFiles": "data/**"
     }
   }
