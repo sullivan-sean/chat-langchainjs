@@ -12,6 +12,13 @@ type Message = {
   isStreaming?: boolean;
 }
 
+const getWebsocketUrl = () => {
+  const origin = window.location.origin;
+  const secure = origin.startsWith("https");
+  const protocol = secure ? "wss" : "ws";
+  return `${protocol}://${window.location.host}/api`
+}
+
 export default function Home() {
 
   const [userInput, setUserInput] = useState("");
@@ -43,7 +50,7 @@ export default function Home() {
 
   const socketInitializer = async () => {
     await fetch('/api/chat-stream');
-    const ws = new WebSocket(`ws://${window.location.host}/api`)
+    const ws = new WebSocket(getWebsocketUrl());
 
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
