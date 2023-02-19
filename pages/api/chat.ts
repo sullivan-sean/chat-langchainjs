@@ -9,17 +9,7 @@ import { makeChain } from "./util";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const body = req.body;
   const dir = path.resolve(process.cwd(), 'data');
-  try {
-    console.log(fs.readdirSync(process.cwd()))
-  } catch (e) {
-    console.log("Failed to read cwd");
-  }
 
-  try {
-    console.log(fs.readdirSync(dir))
-  } catch (e) {
-    console.log("Failed to read data dir");
-  }
   const vectorstore = await HNSWLib.load(dir, new OpenAIEmbeddings())
   res.writeHead(200, {
     'Content-Type': 'text/event-stream',
@@ -31,6 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   });
 
   const sendData = (data: string) => {
+    console.log(`Sending ${data}`)
     res.write(`data: ${data}\n\n`);
   }
 
