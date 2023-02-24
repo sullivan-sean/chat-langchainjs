@@ -17,8 +17,7 @@ Data ingestion happens in two steps.
 First, you should run
 
 ```bash
-pip install -r ingest/requirements.txt
-sh ingest/download.sh
+sh download.sh
 ````
 
 This will download our data source (in this case the Langchain docs ) and parse it.

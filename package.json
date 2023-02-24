@@ -2,13 +2,14 @@
   "name": "chat-langchainjs",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "download": "sh ingest/download.sh",
-    "ingest": "ts-node -r dotenv/config ingest.ts"
+    "ingest": "ts-node --esm -r dotenv/config ingest.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -16,11 +17,12 @@
     "@microsoft/fetch-event-source": "^2.0.1",
     "@mui/material": "^5.11.4",
     "@next/font": "13.1.6",
+    "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.0.3",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
     "hnswlib-node": "^1.2.0",
-    "langchain": "^0.0.7",
+    "langchain": "0.0.11",
     "next": "13.1.6",
     "openai": "^3.1.0",
     "react": "18.2.0",
