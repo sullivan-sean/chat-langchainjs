@@ -20,14 +20,14 @@ First, you should run
 sh download.sh
 ````
 
-This will download our data source (in this case the Langchain docs ) and parse it.
+This will download our data source (in this case the Langchain docs ).
 
 Next, install dependencies and run the ingestion script:
 ```bash
 yarn && yarn ingest
 ```
 
-This will split text, create embeddings, store them in a vectorstore, and
+This will parse the data, split text, create embeddings, store them in a vectorstore, and
 then save it to the `data/` directory.
 
 We save it to a directory because we only want to run the (expensive) data ingestion process once. 
