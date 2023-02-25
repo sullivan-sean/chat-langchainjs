@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "download": "sh ingest/download.sh",
-    "ingest": "ts-node --esm -r dotenv/config ingest.ts"
+    "ingest": "tsx ingest.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -37,6 +37,7 @@
     "@types/ws": "^8.5.4",
     "cohere-ai": "^5.0.2",
     "ts-node": "^10.9.1",
+    "tsx": "^3.12.3",
     "typescript": "4.9.5"
   }
 }
