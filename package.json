@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "download": "sh ingest/download.sh",
-    "ingest": "tsx ingest.ts"
+    "ingest": "tsx -r dotenv/config ingest.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
