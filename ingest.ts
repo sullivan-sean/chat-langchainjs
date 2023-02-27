@@ -75,7 +75,7 @@ export const run = async () => {
   console.log("Creating vector store...");
   /* Create the vectorstore */
   const vectorStore = await HNSWLib.fromDocuments(docs, new OpenAIEmbeddings());
-  vectorStore.save("data");
+  await vectorStore.save("data");
 };
 
 (async () => {
