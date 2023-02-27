@@ -8,21 +8,28 @@ First, create a new `.env` file from `.env.example` and add your OpenAI API key 
 cp .env.example .env
 ```
 
+### Prerequisites
+
+- [Node.js](https://nodejs.org/en/download/)
+- [Yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable)
+- `wget` (on macOS, you can install this with `brew install wget`)
+
 Next, we'll need to load our data source.
 
 ### Data Ingestion
 
-Data ingestion happens in two steps. 
+Data ingestion happens in two steps.
 
 First, you should run
 
 ```bash
 sh download.sh
-````
+```
 
 This will download our data source (in this case the Langchain docs ).
 
 Next, install dependencies and run the ingestion script:
+
 ```bash
 yarn && yarn ingest
 ```
@@ -30,7 +37,7 @@ yarn && yarn ingest
 This will parse the data, split text, create embeddings, store them in a vectorstore, and
 then save it to the `data/` directory.
 
-We save it to a directory because we only want to run the (expensive) data ingestion process once. 
+We save it to a directory because we only want to run the (expensive) data ingestion process once.
 
 The Next.js server relies on the presence of the `data/` directory. Please
 make sure to run this before moving on to the next step.
@@ -62,7 +69,7 @@ seems, Vercel's serverless functions seem to prohibit streaming responses
 
 ## Inspirations
 
-This repo borrows heavily from 
+This repo borrows heavily from
 
 - [ChatLangChain](https://github.com/hwchase17/chat-langchain) - for the backend and data ingestion logic
 - [LangChain Chat NextJS](https://github.com/zahidkhawaja/langchain-chat-nextjs) - for the frontend.
