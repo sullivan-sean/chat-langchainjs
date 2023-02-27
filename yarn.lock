@@ -2549,10 +2549,10 @@ kleur@^4.0.3:
   resolved "https://registry.npmjs.org/kleur/-/kleur-4.1.5.tgz"
   integrity sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==
 
-langchain@0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/langchain/-/langchain-0.0.14.tgz#b1e0d38f016d2f56369c32fbaa737e466f4dbf63"
-  integrity sha512-fnbExP6DhIFaMHQjAFyZqrxWHN9lfxuPRPiV83MlYPmwUMbH56xZn7M0iub8dHqB0l19KuqxI94qt3RXQ7EdkQ==
+langchain@0.0.15:
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/langchain/-/langchain-0.0.15.tgz#dda839208ea44a14469e5cec23ea7b85624a4422"
+  integrity sha512-rO9tNZ68bnDVvmY3uQWgU/l35F3OxNxaB6ES5BoOyfEQvDvvrDw/Xb5/tbUg2q/HqB0/m2/kvCEA5Rp3kSB15Q==
   dependencies:
     browser-or-node "^2.1.1"
     deepcopy "^2.1.0"
