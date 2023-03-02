@@ -2549,10 +2549,10 @@ kleur@^4.0.3:
   resolved "https://registry.npmjs.org/kleur/-/kleur-4.1.5.tgz"
   integrity sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==
 
-langchain@0.0.15:
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/langchain/-/langchain-0.0.15.tgz#dda839208ea44a14469e5cec23ea7b85624a4422"
-  integrity sha512-rO9tNZ68bnDVvmY3uQWgU/l35F3OxNxaB6ES5BoOyfEQvDvvrDw/Xb5/tbUg2q/HqB0/m2/kvCEA5Rp3kSB15Q==
+langchain@0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/langchain/-/langchain-0.0.18.tgz#925b72598d945223c2cbc19bf5473bfcd83182cc"
+  integrity sha512-18VD/nqrgwK+CszfYFrEHs+OJu3pO5Bo1kidjZKATTlc+jDCUPww+2wHQRva4dCxyTaSro6gcnSPFYqIjz5e5Q==
   dependencies:
     browser-or-node "^2.1.1"
     deepcopy "^2.1.0"
@@ -2561,6 +2561,7 @@ langchain@0.0.15:
     expr-eval "^2.0.2"
     gpt-3-encoder "^1.1.4"
     jsonpointer "^5.0.1"
+    openai "^3.2.0"
     p-queue "^7.3.4"
     sqlite3 "^5.1.4"
     unfetch "^5.0.0"
@@ -3206,6 +3207,14 @@ openai@^3.1.0:
   version "3.1.0"
   resolved "https://registry.npmjs.org/openai/-/openai-3.1.0.tgz"
   integrity sha512-v5kKFH5o+8ld+t0arudj833Mgm3GcgBnbyN9946bj6u7bvel4Yg6YFz2A4HLIYDzmMjIo0s6vSG9x73kOwvdCg==
+  dependencies:
+    axios "^0.26.0"
+    form-data "^4.0.0"
+
+openai@^3.2.0:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/openai/-/openai-3.2.1.tgz#1fa35bdf979cbde8453b43f2dd3a7d401ee40866"
+  integrity sha512-762C9BNlJPbjjlWZi4WYK9iM2tAVAv0uUp1UmI34vb0CN5T2mjB/qM6RYBmNKMh/dN9fC+bxqPwWJZUTWW052A==
   dependencies:
     axios "^0.26.0"
     form-data "^4.0.0"
