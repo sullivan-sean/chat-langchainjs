@@ -10,7 +10,7 @@ cp .env.example .env
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/en/download/)
+- [Node.js](https://nodejs.org/en/download/) (v16 or higher)
 - [Yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable)
 - `wget` (on macOS, you can install this with `brew install wget`)
 
@@ -33,6 +33,8 @@ Next, install dependencies and run the ingestion script:
 ```bash
 yarn && yarn ingest
 ```
+
+_Note: If on Node v16, use `NODE_OPTIONS='--experimental-fetch' yarn ingest`_
 
 This will parse the data, split text, create embeddings, store them in a vectorstore, and
 then save it to the `data/` directory.
