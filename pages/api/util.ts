@@ -1,4 +1,4 @@
-import { OpenAI } from "langchain/llms";
+import { OpenAIChat } from "langchain/llms";
 import { LLMChain, ChatVectorDBQAChain, loadQAChain } from "langchain/chains";
 import { HNSWLib } from "langchain/vectorstores";
 import { PromptTemplate } from "langchain/prompts";
@@ -25,11 +25,12 @@ Answer in Markdown:`);
 
 export const makeChain = (vectorstore: HNSWLib, onTokenStream?: (token: string) => void) => {
   const questionGenerator = new LLMChain({
-    llm: new OpenAI({ temperature: 0 }),
+    llm: new OpenAIChat({ temperature: 0,modelName: "gpt-3.5-turbo" }),
     prompt: CONDENSE_PROMPT,
   });
   const docChain = loadQAChain(
-    new OpenAI({
+    new OpenAIChat({
+      modelName: "gpt-3.5-turbo",
       temperature: 0,
       streaming: Boolean(onTokenStream),
       callbackManager: {
