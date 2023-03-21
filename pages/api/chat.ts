@@ -32,12 +32,10 @@ export default async function handler(
   });
 
   try {
-    const values = await chain.call({
+    await chain.call({
       question: body.question,
       chat_history: body.history,
     });
-    console.log("Chain completed");
-    console.log(values.sourceDocuments);
   } catch (err) {
     console.error(err);
     // Ignore error
