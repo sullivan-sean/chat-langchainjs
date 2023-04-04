@@ -9,7 +9,6 @@ import {
   ChatPromptTemplate,
   SystemMessagePromptTemplate,
   HumanMessagePromptTemplate,
-  PromptTemplate,
 } from "langchain/prompts";
 import { CallbackManager } from "langchain/callbacks";
 
@@ -51,8 +50,7 @@ export const makeChain = (
         handleLLMNewToken: onTokenStream,
       }),
     }),
-    // temporary until we fix this type upstream
-    { prompt: QA_PROMPT as any as PromptTemplate }
+    { prompt: QA_PROMPT }
   );
 
   return new ChatVectorDBQAChain({
