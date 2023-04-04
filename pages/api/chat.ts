@@ -3,8 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import path from "path";
 import { HNSWLib } from "langchain/vectorstores";
 import { OpenAIEmbeddings } from "langchain/embeddings";
-import { makeChain } from "./util";
-import { AIChatMessage, HumanChatMessage } from "langchain/schema";
+import { formatHistory, makeChain } from "./util";
 
 export default async function handler(
   req: NextApiRequest,
@@ -35,10 +34,7 @@ export default async function handler(
   try {
     await chain.call({
       question: body.question,
-      chat_history: (body.history as [string, string][]).flatMap(([q, a]) => [
-        new HumanChatMessage(q),
-        new AIChatMessage(a),
-      ]),
+      chat_history: formatHistory(body.history),
     });
   } catch (err) {
     console.error(err);

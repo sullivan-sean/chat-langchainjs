@@ -5,7 +5,7 @@ import type { Server as HttpsServer } from "https";
 import { WebSocketServer } from "ws";
 import { HNSWLib } from "langchain/vectorstores";
 import { OpenAIEmbeddings } from "langchain/embeddings";
-import { makeChain } from "./util";
+import { formatHistory, makeChain } from "./util";
 
 export default async function handler(
   req: NextApiRequest,
@@ -49,7 +49,6 @@ export default async function handler(
       (vs) => makeChain(vs, onNewToken)
     );
     const chatHistory: [string, string][] = [];
-    const encoder = new TextEncoder();
 
     ws.on("message", async (data) => {
       try {
@@ -61,7 +60,7 @@ export default async function handler(
 
         const result = await chain.call({
           question,
-          chat_history: chatHistory,
+          chat_history: formatHistory(chatHistory),
         });
         chatHistory.push([question, result.answer]);
 

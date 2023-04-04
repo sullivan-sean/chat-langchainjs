@@ -13,6 +13,7 @@ import {
   SystemMessagePromptTemplate,
 } from "langchain/prompts";
 import { CallbackManager } from "langchain/callbacks";
+import { AIChatMessage, HumanChatMessage } from "langchain/schema";
 
 const CONDENSE_PROMPT = ChatPromptTemplate.fromPromptMessages([
   SystemMessagePromptTemplate.fromTemplate(
@@ -61,3 +62,6 @@ export const makeChain = (
     questionGeneratorChain: questionGenerator,
   });
 };
+
+export const formatHistory = (history: [string, string][]) =>
+  history.flatMap(([q, a]) => [new HumanChatMessage(q), new AIChatMessage(a)]);
