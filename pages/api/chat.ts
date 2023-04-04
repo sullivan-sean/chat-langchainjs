@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import path from "path";
 import { HNSWLib } from "langchain/vectorstores";
 import { OpenAIEmbeddings } from "langchain/embeddings";
-import { makeChain } from "./util";
+import { formatHistory, makeChain } from "./util";
 
 export default async function handler(
   req: NextApiRequest,
@@ -27,14 +27,14 @@ export default async function handler(
   };
 
   sendData(JSON.stringify({ data: "" }));
-  const chain = makeChain(vectorstore, (token: string) => {
+  const chain = makeChain(vectorstore, async (token: string) => {
     sendData(JSON.stringify({ data: token }));
   });
 
   try {
     await chain.call({
       question: body.question,
-      chat_history: body.history,
+      chat_history: formatHistory(body.history),
     });
   } catch (err) {
     console.error(err);
