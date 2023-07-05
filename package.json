@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "download": "sh ingest/download.sh",
+    "download": "sh download.sh",
     "ingest": "tsx -r dotenv/config ingest.ts"
   },
   "dependencies": {

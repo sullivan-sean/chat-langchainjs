@@ -3,7 +3,7 @@ import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import * as fs from "fs";
 import { Document } from "langchain/document";
-import { BaseDocumentLoader } from "langchain/document_loaders";
+import { BaseDocumentLoader } from "langchain/document_loaders/base";
 import path from "path";
 import { load } from "cheerio";
 
@@ -58,7 +58,7 @@ class ReadTheDocsLoader extends BaseDocumentLoader {
   }
 }
 
-const directoryPath = "langchain.readthedocs.io";
+const directoryPath = "docs.langchain.com";
 const loader = new ReadTheDocsLoader(directoryPath);
 
 export const run = async () => {

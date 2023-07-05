@@ -25,7 +25,7 @@ const CONDENSE_PROMPT = ChatPromptTemplate.fromPromptMessages([
 ]);
 
 const QA_PROMPT = PromptTemplate.fromTemplate(
-  `You are an AI assistant for the open source library LangChain. The documentation is located at https://langchain.readthedocs.io.
+  `You are an AI assistant for the open source library LangChain. The documentation is located at https://docs.langchain.com/docs/.
 You are given the following extracted parts of a long document and a question. Provide a conversational answer with a hyperlink to the documentation.
 You should only use hyperlinks that are explicitly listed as a source in the context. Do NOT make up a hyperlink that is not listed.
 If the question includes a request for code, provide a code block directly from the documentation.

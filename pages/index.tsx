@@ -127,7 +127,7 @@ export default function Home() {
         </div>
         <div className = {styles.navlinks}>
           <a
-            href="https://langchain.readthedocs.io/en/latest/"
+            href="https://docs.langchain.com/docs/"
             target="_blank"
             rel="noreferrer"
           >
