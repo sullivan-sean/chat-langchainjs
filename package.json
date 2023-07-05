@@ -22,7 +22,7 @@
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
     "hnswlib-node": "^1.4.2",
-    "langchain": "0.0.47",
+    "langchain": "^0.0.102",
     "next": "13.1.6",
     "openai": "^3.1.0",
     "react": "18.2.0",

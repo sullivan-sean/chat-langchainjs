@@ -1,4 +1,5 @@
-import { ChatOpenAI } from "langchain/chat_models";
+import { OpenAI } from "langchain/llms/openai";
+import { ChatOpenAI } from "langchain/chat_models/openai";
 import {
   LLMChain,
   ConversationalRetrievalQAChain,
@@ -42,7 +43,8 @@ export const makeChain = (
   onTokenStream?: (token: string) => Promise<void>
 ) => {
   const questionGenerator = new LLMChain({
-    llm: new ChatOpenAI({ temperature: 0 }),
+    // Using ChatOpenAI here gives `TypeError: message._getType is not a function`, so we use regular OpenAI.
+    llm: new OpenAI({ temperature: 0 }),
     prompt: CONDENSE_PROMPT,
   });
   const docChain = loadQAStuffChain(

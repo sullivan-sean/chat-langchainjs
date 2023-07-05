@@ -4,7 +4,7 @@ import type { Server as HttpServer } from "http";
 import type { Server as HttpsServer } from "https";
 import { WebSocketServer } from "ws";
 import { HNSWLib } from "langchain/vectorstores";
-import { OpenAIEmbeddings } from "langchain/embeddings";
+import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { formatHistory, makeChain } from "./util";
 
 export default async function handler(
