@@ -39,4 +39,4 @@ yarn-error.log*
 next-env.d.ts
 
 ingested_data/
-langchain.readthedocs.io/
+docs.langchain.com/
