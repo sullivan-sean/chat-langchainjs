@@ -1,9 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import path from "path";
-import { HNSWLib } from "langchain/vectorstores";
-import { OpenAIEmbeddings } from "langchain/embeddings";
-import { makeChain } from "./util";
+import { HNSWLib } from "langchain/vectorstores/hnswlib";
+import { OpenAIEmbeddings } from "langchain/embeddings/openai";
+import { formatHistory, makeChain } from "./util";
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,7 +12,9 @@ export default async function handler(
   const body = req.body;
   const dir = path.resolve(process.cwd(), "data");
 
-  const vectorstore = await HNSWLib.load(dir, new OpenAIEmbeddings());
+  const vectorstore = await HNSWLib.load(dir, new OpenAIEmbeddings({
+    azureOpenAIApiDeploymentName: 'text-embedding-ada-002', // Azure OpenAI API deployment name
+  }));
   res.writeHead(200, {
     "Content-Type": "text/event-stream",
     // Important to set no-transform to avoid compression, which will delay
@@ -34,7 +36,7 @@ export default async function handler(
   try {
     await chain.call({
       question: body.question,
-      chat_history: body.history,
+      chat_history: formatHistory(body.history),
     });
   } catch (err) {
     console.error(err);

@@ -1,13 +1,16 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next'
-import type { Server as HttpServer } from "http";
-import type { Server as HttpsServer } from "https";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import type { Server as HttpServer } from 'http';
+import type { Server as HttpsServer } from 'https';
 import { WebSocketServer } from 'ws';
-import { HNSWLib } from "langchain/vectorstores";
-import { OpenAIEmbeddings } from 'langchain/embeddings';
-import { makeChain } from "./util";
+import { HNSWLib } from 'langchain/vectorstores/hnswlib';
+import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
+import { formatHistory, makeChain } from './util';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if ((res.socket as any).server.wss) {
     res.end();
     return;
@@ -31,10 +34,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     };
 
     const onNewToken = (token: string) => {
-      sendResponse({ sender: 'bot', message: token, type: 'stream' });
+      sendResponse({
+        sender: 'bot',
+        message: token,
+        type: 'stream',
+      });
     }
 
-    const chainPromise = HNSWLib.load("data", new OpenAIEmbeddings()).then((vs) => makeChain(vs, onNewToken));
+    const chainPromise = HNSWLib.load('data', new OpenAIEmbeddings({
+      azureOpenAIApiDeploymentName: 'text-embedding-ada-002', // Azure OpenAI API deployment name
+    })).then((vs) => makeChain(vs, onNewToken));
     const chatHistory: [string, string][] = [];
     const encoder = new TextEncoder();
 
@@ -44,20 +53,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const question = data.toString();
         sendResponse({ sender: 'you', message: question, type: 'stream' });
 
-        sendResponse({ sender: 'bot', message: "", type: 'start' });
+        sendResponse({ sender: 'bot', message: '', type: 'start' });
         const chain = await chainPromise;
 
         const result = await chain.call({
             question,
-            chat_history: chatHistory,
+            chat_history: formayHistory(chatHistory),
         });
         chatHistory.push([question, result.answer]);
 
-        sendResponse({ sender: 'bot', message: "", type: 'end' });
+        sendResponse({ sender: 'bot', message: '', type: 'end' });
       } catch (e) {
         sendResponse({
             sender: 'bot',
-            message: "Sorry, something went wrong. Try again.",
+            message: 'Sorry, something went wrong. Try again.',
             type: 'error'
         });
       }

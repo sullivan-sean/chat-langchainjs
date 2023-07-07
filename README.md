@@ -23,7 +23,7 @@ Data ingestion happens in two steps.
 First, you should run
 
 ```bash
-sh download.sh
+yarn download
 ```
 
 This will download our data source (in this case the Langchain docs ).
