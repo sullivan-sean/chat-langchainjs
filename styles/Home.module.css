@@ -4,6 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 2rem;
+  background-color: #0f0f17; /* Dark background for the entire app */
 }
 
 .header {
@@ -15,21 +16,24 @@
 }
 
 .topnav {
-  background-color: #141619;
-  border-bottom: 1px solid #30373d;
+  background-color: #1e1e2e; /* Updated darker background */
+  border-bottom: 1px solid #494d64; /* Softer border color */
   display: flex;
   justify-content: space-between;
   padding: 1rem 0.75rem 1rem 0.75rem;
   align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); /* Added subtle shadow */
 }
 
 .navlogo, .navlinks a {
   font-weight: 500;
+  transition: opacity 0.2s ease; /* Smooth hover effect */
 }
 
 .navlogo {
   font-size: 1.25rem;
   margin-left: 1rem;
+  color: #cdd6f4; /* Brighter text color */
 }
 
 .navlinks {
@@ -37,6 +41,16 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+
+.navlinks a {
+  color: #cdd6f4; /* Consistent text color */
+  padding: 0.5rem 0.75rem; /* Add padding for better clickability */
+  border-radius: 0.25rem; /* Rounded corners */
+}
+
+.navlinks a:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Subtle hover background */
 }
 
 .apptitle {
@@ -57,19 +71,29 @@
 
 .cloudform {
   position: relative;
+  border-radius: 0.5rem;
+  background: #1e1e2e; /* Match with message background */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  margin-top: 1rem; /* Add margin from messages */
+  transition: box-shadow 0.3s ease; /* Smooth shadow transition */
+}
+
+.cloudform:focus-within {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Shadow when focused */
 }
 
 .textarea {
   position: relative;
   resize: none;
   font-size: 1.1rem;
-  padding: 1rem 2rem 1rem 2rem;
+  padding: 1rem 2rem 1rem 1.2rem; /* Reduced left padding */
   width: 75vw;
   border-radius: 0.5rem;
-  border: 1px solid #30373d;
-  background: #070809;
-  color: #ECECF1;
+  border: 1px solid #494d64; /* Match with other borders */
+  background: #1e1e2e; /* Match with form background */
+  color: #cdd6f4; /* Brighter text color */
   outline: none;
+  transition: border-color 0.3s ease; /* Smooth border transition */
 }
 
 .textarea:disabled {
@@ -84,11 +108,15 @@
   position: absolute;
   top: 0.87rem;
   right: 1rem;
-  color: rgb(165, 162, 162);
-  background: none;
+  color: #cdd6f4; /* Brighter color */
+  background: rgba(255, 255, 255, 0.05); /* Slight background */
   padding: 0.3rem;
   border: none;
+  border-radius: 0.3rem; /* Rounded corners */
   display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease; /* Multiple transitions */
 }
 
 .loadingwheel {
@@ -105,21 +133,42 @@
 }
 
 .generatebutton:hover {
-  background: #1f2227;
-  border-radius: 0.2rem;
+  background: rgba(255, 255, 255, 0.1); /* Lighter hover background */
+  transform: translateY(-1px); /* Slight lift effect */
+}
+
+.generatebutton:active {
+  transform: translateY(0); /* Return to normal on click */
 }
 
 .generatebutton:disabled {
-  opacity: 0.9;
+  opacity: 0.6;
   cursor: not-allowed;
   background: none;
+  transform: none;
 }
 
 .messagelist {
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto; /* Changed from scroll to auto */
   border-radius: 0.5rem;
+  padding: 0.5rem; /* Added padding */
+  scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+/* Add custom scrollbar */
+.messagelist::-webkit-scrollbar {
+  width: 6px;
+}
+
+.messagelist::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.messagelist::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
 }
 
 .messagelistloading {
@@ -130,20 +179,24 @@
 }
 
 .usermessage {
-  background: #070809;
+  background: #313244; /* Updated user message background */
   padding: 1.5rem;
   color: #ECECF1;
+  border-radius: 0.5rem 0.5rem 0 0.5rem; /* Rounded corners except bottom right */
+  margin-bottom: 0.5rem; /* Add space between messages */
 }
 
 .usermessagewaiting{
   padding: 1.5rem;
   color: #ECECF1;
-  background: linear-gradient(to left, #070809, #1a1c20, #070809);
+  background: linear-gradient(to left, #313244, #45475a, #313244);
   background-size: 200% 200%;
   background-position: -100% 0;
   animation: loading-gradient 2s ease-in-out infinite;
   animation-direction: alternate;
   animation-name: loading-gradient;
+  border-radius: 0.5rem 0.5rem 0 0.5rem; /* Rounded corners except bottom right */
+  margin-bottom: 0.5rem; /* Add space between messages */
 }
 
 @keyframes loading-gradient {
@@ -156,10 +209,12 @@
 }
 
 .apimessage {
-  background: #141619;
+  background: #1e1e2e; /* Updated API message background */
   padding: 1.5rem;
   color: #ECECF1;
   animation: fadein 0.5s;
+  border-radius: 0.5rem 0.5rem 0.5rem 0; /* Rounded corners except bottom left */
+  margin-bottom: 0.5rem; /* Add space between messages */
 }
 
 @keyframes fadein {
@@ -216,12 +271,14 @@
 .cloud {
   width: 75vw;
   height: 65vh;
-  background: #070809;
-  border-radius: 0.5rem;
-  border: 1px solid #30373d;
+  background: #0f0f17; /* Darker background */
+  border-radius: 0.75rem; /* Increased border radius */
+  border: 1px solid #494d64; /* Softer border color */
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Added shadow for depth */
+  overflow: hidden; /* Ensure content stays within rounded corners */
 }
 
 .pointsnormal {
@@ -236,53 +293,90 @@
 }
 
 .footer {
-  color: #5f6368;
+  color: #7f849c; /* Brighter text color */
   font-size: 0.8rem;
   margin: 1.5rem;
+  text-align: center;
 }
 
 .footer a {
   font-weight: 500;
-  color: #7a7d81;
+  color: #a6adc8; /* Brighter link color */
+  transition: color 0.2s ease; /* Smooth color transition */
 }
 
 .footer a:hover {
   opacity: 0.8;
 }
 
-/* Mobile optimization */
-@media (max-width: 600px) {
+/* Add message time styling */
+.messagetime {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 0.5rem;
+  align-self: flex-end;
+  margin-left: auto;
+}
 
+/* Add smooth transitions for message containers */
+.apimessage, .usermessage, .usermessagewaiting {
+  transition: all 0.3s ease;
+}
+
+/* Improve the existing fade-in animation */
+@keyframes fadein {
+  from { 
+    opacity: 0; 
+    transform: translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
   .main {
     padding: 1rem;
-    max-height: 90vh;
+    max-height: 100vh;
   }
 
   .cloud {
-    width: 22rem;
-    height: 28rem;
+    width: 90vw;
+    height: 70vh;
+    border-radius: 0.5rem;
   }
+  
   .textarea {
-    width: 22rem;
+    width: 90vw;
+    font-size: 1rem;
+    padding: 0.75rem 2.5rem 0.75rem 1rem;
   }
+  
   .topnav {
-    border: 1px solid black;
-    align-items: center;
-    padding: 0.85rem 0.75rem 0.85rem 0.75rem;
+    padding: 0.85rem 0.75rem;
   }
 
-.navlogo {
-  font-size: 1.25rem;
-  width: 20rem;
-}
+  .navlogo {
+    font-size: 1.1rem;
+  }
+  
+  .navlinks {
+    width: auto;
+  }
+  
+  .navlinks a {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.5rem;
+  }
 
-.markdownanswer code {
-  white-space : pre-wrap !important;
-}
-
-.footer {
-  font-size: 0.7rem;
-  width: 100%;
-  text-align: center;
-}
+  .markdownanswer {
+    font-size: 0.9rem;
+  }
+  
+  .footer {
+    font-size: 0.7rem;
+    margin: 1rem;
+  }
 }

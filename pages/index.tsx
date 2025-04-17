@@ -166,6 +166,7 @@ export default function Home() {
                     <div className = {styles.markdownanswer}>
                       <ReactMarkdown linkTarget="_blank">{message.message}</ReactMarkdown>
                     </div>
+                    <div className={styles.messagetime}>{new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
                   </div>
               )
             })}
